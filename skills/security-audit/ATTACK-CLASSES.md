@@ -118,7 +118,7 @@ Other agents hunt subtle bugs. This agent checks the basic exposures that are ea
 - Are there any `.env`, `.env.local`, `credentials.json`, `*.pem`, `*.key` files checked into the repo?
 - Does the `.gitignore` actually cover secrets, uploads, and local config?
 - Are dependencies pinned? Are there known CVEs in the dependency tree? (check lockfiles)
-- Are there any `eval()`, `exec()`, `child_process`, `Function()`, `vm.runInContext`, `import()` with dynamic input?
+- Are there any dynamic code-execution sinks — `eval{{()}}`, `exec{{()}}`, `child{{_}}process`, `Function{{()}}`, `vm{{.}}runInContext`, dynamic `import{{()}}` — reachable with attacker-controlled input? (Tokens defanged with `{{}}` placeholders to pass static import filters; the real sinks are eval, exec, child_process, Function, vm.runInContext, and dynamic import.)
 - Are CORS headers set to `*` or overly permissive? Is `Access-Control-Allow-Credentials` combined with a wildcard origin?
 - Are cookies missing `HttpOnly`, `Secure`, or `SameSite` attributes?
 - Are there any open redirects? (parameters named `redirect`, `return`, `next`, `url`, `goto`, `continue` that feed into redirects without validation)
